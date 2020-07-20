@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.timezone import now
 
-
+# to store unique employee ids uploaded in uploads
 class Employee(models.Model):
     employee_id = models.IntegerField(unique=True)
 

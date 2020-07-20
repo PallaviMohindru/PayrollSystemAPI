@@ -78,6 +78,7 @@ class FileView(APIView):
                     date__range=[pay_start_date, pay_end_date], employee=employee
                 )
 
+                #houly rate calculation based on Job group
                 for record in employee_time_report_data:
                     if record.job_group == "A":
                         amountPaid = record.hours_worked * 20
