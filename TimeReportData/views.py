@@ -52,3 +52,49 @@ class FileView(APIView):
                 )
 
         return Response(file_serializer.data, status=status.HTTP_200_OK)
+
+
+    def get(self, request, *args, **kwargs):
+        dates = EmployeeTimeReportData.objects.all().order_by("date")
+        min_date = dates.first().date
+        max_date = dates.last().date
+        employee_reports = []
+        while min_date < max_date: #data sorted by dates
+            if min_date.day < 16:
+                pay_start_date = min_date.replace(day=1)
+                pay_end_date = pay_start_date + datetime.timedelta(days=14)
+            else:
+                pay_start_date = min_date.replace(day=16)
+                last_day_of_month = calendar.monthrange(
+                    pay_start_date.year, pay_start_date.month
+                )[1]
+                pay_end_date = pay_start_date.replace(day=last_day_of_month)
+
+            employees = Employee.objects.all()
+
+            for employee in employees:
+                data = {}
+                employee_time_report_data = EmployeeTimeReportData.objects.filter(
+                    date__range=[pay_start_date, pay_end_date], employee=employee
+                )
+
+                for record in employee_time_report_data:
+                    if record.job_group == "A":
+                        amountPaid = record.hours_worked * 20
+                    elif record.job_group == "B":
+                        amountPaid = record.hours_worked * 30
+
+                    data = {
+                        "employeeId": employee.employee_id,
+                        "payPeriod": {
+                            "startDate": pay_start_date,
+                            "endDate": pay_end_date,
+                        },
+                        "amountPaid": "${}".format(str(amountPaid)),
+                    }
+                    employee_reports.append(data)
+
+            min_date = pay_end_date + datetime.timedelta(1)
+
+        result = {"payrollReport": {"employeeReports": employee_reports}}
+        return Response(result)
