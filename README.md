@@ -3,8 +3,9 @@ API to upload a CSV file containing data on the number of hours worked per day p
 
 ## Instructions on how to build and run the application
 1. unbundle the code
-1. install the required packages:  pip install -r requirements.txt
+1. install the required packages with the given command on command prompt:  pip install -r requirements.txt
 1. run these commands:
+    1. python manage.py makemigrations
     1. python manage.py migrate
     1. python manage.py createsuperuser
     1. python manage.py runserver
@@ -22,5 +23,4 @@ I have also tested uploading file with same report ID that was previously upload
 1. Change the DATABASES configuration in settings.py as default sqllite3 is not recommended from Production.
 
 ### What compromises did you have to make as a result of the time constraints of this challenge?
-There was a time where I had to compromise with my office work to complete this challenge as that work was not on priority. However, I made sure that my office work is not impacted much.
-Few of the personal planned items were impacted but that can be done now. 
+Few of the personal planned items were impacted but no regrets on that. I made sure my office work is not impacted with this challenge. 
