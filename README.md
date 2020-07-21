@@ -1,7 +1,9 @@
 # PayrollSystemAPI
 API to upload a CSV file containing data on the number of hours worked per day per employee and retrieve a report detailing how much each employee should be paid in each pay period
 
-## Instructions on how to build and run the application
+## Instructions on how to build/run the application
+1. create a directory : mkdir project_name
+1. go to that directory : cd project_name
 1. unbundle the code
 1. install the required packages with the given command on command prompt:  pip install -r requirements.txt
 1. run these commands:
@@ -20,7 +22,7 @@ I have also tested uploading file with same report ID that was previously upload
 ### If this application was destined for a production environment, what would you add or change?
 1. Set DEBUG to False in settings.py sensitive/confidential debug trace and variable information from being displayed)
 1. Change setting of SECRECT_KEY so that the key used in production is not in source control or accessible outside the production server. Key can be read from environment variable or from a file.
-1. Change the DATABASES configuration in settings.py as default sqllite3 is not recommended from Production.
+1. Change the DATABASES configuration in settings.py as default sqllite3 is not recommended for Production.
 
 ### What compromises did you have to make as a result of the time constraints of this challenge?
 Few of the personal planned items were impacted but no regrets on that. I made sure my office work is not impacted with this challenge. 
